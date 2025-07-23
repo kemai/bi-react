@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
+    "allowJs": true,
+    "jsx": "react-jsx",     
+    "checkJs": false,         
     "paths": {
       "@/*": ["*"]
     }

@@ -1,22 +1,12 @@
-
-"use client"
-
-import { TrendingUp } from "lucide-react"
-import { CartesianGrid, Line, LineChart, XAxis, YAxis, Tooltip as RechartsTooltip } from "recharts"
+"use client";
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card"
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "../ui/chart"
+  VictoryChart,
+  VictoryLine,
+  VictoryAxis,
+  VictoryVoronoiContainer,
+  VictoryTooltip,
+} from "victory";
 
 const chartData = [
   { date: "2024-01", users: 150 },
@@ -25,64 +15,49 @@ const chartData = [
   { date: "2024-04", users: 200 },
   { date: "2024-05", users: 250 },
   { date: "2024-06", users: 300 },
-]
-
-const chartConfig = {
-  users: {
-    label: "Active Users",
-    color: "hsl(var(--accent))",
-  },
-}
+];
 
 export default function SampleLineChart() {
   return (
-    <ChartContainer config={chartConfig} className="min-h-[200px] w-full aspect-auto">
-      <LineChart
-        accessibilityLayer
-        data={chartData}
-        margin={{
-          top: 5,
-          right: 20,
-          left: -10,
-          bottom: 5,
-        }}
+    <div className="min-h-[200px] w-full aspect-auto">
+      <VictoryChart
+        containerComponent={
+          <VictoryVoronoiContainer
+            labels={({ datum }) => datum.y}
+            labelComponent={<VictoryTooltip />}
+          />
+        }
       >
-        <CartesianGrid vertical={false} strokeDasharray="3 3" />
-        <XAxis
-          dataKey="date"
-          tickLine={false}
-          axisLine={false}
-          tickMargin={8}
-          tickFormatter={(value) => {
-            const date = new Date(value + "-01") // Ensure it's parsed as a date
+        <VictoryAxis
+          tickFormat={(value) => {
+            const date = new Date(value + "-01");
             return date.toLocaleDateString("en-US", {
               month: "short",
-            })
+            });
+          }}
+          style={{
+            tickLabels: { padding: 8 },
+            axis: { stroke: "none" },
+            grid: { stroke: "none" },
           }}
         />
-        <YAxis 
-          tickLine={false}
-          axisLine={false}
-          tickMargin={10}
-        />
-        <ChartTooltip
-          cursor={false}
-          content={<ChartTooltipContent indicator="line" />}
-        />
-        <Line
-          dataKey="users"
-          type="monotone"
-          stroke="var(--color-users)"
-          strokeWidth={2}
-          dot={{
-            fill: "var(--color-users)",
-            r: 4,
-          }}
-          activeDot={{
-            r: 6,
+        <VictoryAxis
+          dependentAxis
+          style={{
+            tickLabels: { padding: 10 },
+            axis: { stroke: "none" },
+            grid: { stroke: "none" },
           }}
         />
-      </LineChart>
-    </ChartContainer>
-  )
+
+        <VictoryLine
+          data={chartData.map((d) => ({ x: d.date, y: d.users }))}
+          style={{
+            data: { stroke: "hsl(var(--accent))", strokeWidth: 2 },
+          }}
+          interpolation="monotoneX"
+        />
+      </VictoryChart>
+    </div>
+  );
 }

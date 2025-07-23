@@ -11,7 +11,9 @@ export default function HomePage() {
         description="Welcome to your BI Intrapresa overview."
       />
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <LookerStudioCard className="md:col-span-2 lg:col-span-2" />
+        <LookerStudioCard className="md:col-span-6 lg:col-span-3" />
+        <DataVisualizationCard className="lg:col-span-1" />
+        <DataVisualizationCard className="lg:col-span-1" />
         <DataVisualizationCard className="lg:col-span-1" />
       </div>
     </div>

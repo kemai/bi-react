@@ -1,22 +1,11 @@
-
-"use client"
-
-import { TrendingUp } from "lucide-react"
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip as RechartsTooltip } from "recharts"
+"use client";
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card"
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "../ui/chart"
+  VictoryChart,
+  VictoryBar,
+  VictoryAxis,
+  VictoryTooltip,
+} from "victory";
 
 const chartData = [
   { month: "January", sales: 186 },
@@ -25,38 +14,43 @@ const chartData = [
   { month: "April", sales: 173 },
   { month: "May", sales: 209 },
   { month: "June", sales: 280 },
-]
-
-const chartConfig = {
-  sales: {
-    label: "Sales",
-    color: "hsl(var(--primary))",
-  },
-}
+];
 
 export default function SampleBarChart() {
   return (
-    <ChartContainer config={chartConfig} className="min-h-[200px] w-full aspect-auto">
-      <BarChart accessibilityLayer data={chartData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
-        <CartesianGrid vertical={false} strokeDasharray="3 3" />
-        <XAxis
-          dataKey="month"
-          tickLine={false}
-          tickMargin={10}
-          axisLine={false}
-          tickFormatter={(value) => value.slice(0, 3)}
+    <div className="min-h-[200px] w-full aspect-auto">
+      <VictoryChart domainPadding={20}>
+        {/* X Axis */}
+        <VictoryAxis
+          tickFormat={(t) => (t as string).slice(0, 3)}
+          style={{
+            tickLabels: { padding: 10 },
+            axis:       { stroke: "none" },
+            grid:       { stroke: "none" },
+          }}
         />
-        <YAxis 
-          tickLine={false}
-          axisLine={false}
-          tickMargin={10}
+
+        {/* Y Axis */}
+        <VictoryAxis
+          dependentAxis
+          style={{
+            tickLabels: { padding: 10 },
+            axis:       { stroke: "none" },
+            grid:       { stroke: "none" },
+          }}
         />
-        <ChartTooltip
-          cursor={false}
-          content={<ChartTooltipContent indicator="dot" />}
+
+        {/* Bars with built-in tooltips */}
+        <VictoryBar
+          data={chartData.map((d) => ({ x: d.month, y: d.sales }))}
+          style={{ data: { fill: "hsl(var(--primary))" } }}
+          cornerRadius={4}
+
+          // ← here’s the change: labels + labelComponent instead of containerComponent
+          labels={({ datum }) => datum.y}
+          labelComponent={<VictoryTooltip />}
         />
-        <Bar dataKey="sales" fill="var(--color-sales)" radius={4} />
-      </BarChart>
-    </ChartContainer>
-  )
+      </VictoryChart>
+    </div>
+  );
 }

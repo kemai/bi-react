@@ -1,17 +1,14 @@
 // src/components/Layout.tsx
-import React from "react";
-import "../index.css";
+
+import { Outlet } from "react-router-dom";
 import { Toaster } from "../components/ui/toaster";
 import { SidebarProvider } from "../components/ui/sidebar";
 import AppSidebar from "../components/layout/app-sidebar";
 import AppHeader from "../components/layout/app-header";
 import { TooltipProvider } from "../components/ui/tooltip";
+import "../index.css";
 
-interface LayoutProps {
-  children: React.ReactNode;
-}
-
-export default function Layout({ children }: LayoutProps) {
+export default function Layout() {
   return (
     <SidebarProvider defaultOpen={true}>
       <TooltipProvider delayDuration={0}>
@@ -23,7 +20,8 @@ export default function Layout({ children }: LayoutProps) {
           <div className="flex flex-1 flex-col">
             <AppHeader />
             <main className="flex flex-col flex-1 w-full p-4 md:p-6 lg:p-8 overflow-y-auto">
-              {children}
+              {/* qui React Router inietta le route figlie */}
+              <Outlet />
             </main>
           </div>
         </div>

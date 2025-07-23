@@ -19,7 +19,7 @@ export default function LookerStudioCard({ className }: LookerStudioCardProps) {
         <CardDescription>Connect your Looker Studio account to fetch and visualize your data seamlessly.</CardDescription>
       </CardHeader>
      <CardContent className="p-0">
-        <LookerEmbedFrame reportId={REPORT_ID} height={450} />
+        <LookerEmbedFrame reportId={REPORT_ID} height={900} />
       </CardContent>
       <CardFooter>
         {/* <Button className="w-full" aria-label="Connect Looker Studio Account">

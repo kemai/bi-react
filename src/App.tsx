@@ -1,23 +1,23 @@
-
-import { Routes, Route } from 'react-router-dom';
-import  Layout  from './components/Layout';
-import  HomePage  from './pages/HomePage';
-import  DataSourcesPage  from './pages/DataSourcesPage';
-import  BIQueryPage  from './pages/BIQueryPage';
-import  ReportsPage  from './pages/ReportsPage';
-import  SettingsPage  from './pages/SettingsPage';
-
+// src/App.tsx
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import { appRoutes } from "./routes";
+import NotFound from "./pages/404";
 
 export default function App() {
   return (
-    <Layout>
+    <>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="data-sources" element={<DataSourcesPage />} />
-        <Route path="query" element={<BIQueryPage />} />
-        <Route path="reports" element={<ReportsPage />} />
-        <Route path="settings" element={<SettingsPage />} />
+        {/* Tutte le rotte “normali” dentro a Layout */}
+        <Route element={<Layout />}>
+          {appRoutes.map(({ path, element }) => (
+            <Route key={path} path={path} element={element} />
+          ))}
+        </Route>
+
+        {/* La pagina 404 full-screen */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
-    </Layout>
+    </>
   );
 }

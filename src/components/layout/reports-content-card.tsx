@@ -11,7 +11,8 @@ interface ReportsContentCardProps {
 
 export default function ReportsContentCard({ icon: Icon, title, description, children }: ReportsContentCardProps) {
   return (
-    <Card className="w-full">
+    // <Card className="w-full">
+    <Card className="md:col-span-6 lg:col-span-3">
       <CardHeader className="items-center text-center">
         <div className="mb-2">
           <Icon className="h-12 w-12 text-primary" />
