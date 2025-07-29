@@ -3,6 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import { appRoutes } from "./routes";
 import NotFound from "./pages/404";
+import KonamiCodeEasterEgg from "./components/arcade/KonamiCodeEasterEgg";
+
+
 
 export default function App() {
   return (
@@ -15,9 +18,10 @@ export default function App() {
           ))}
         </Route>
 
-        {/* La pagina 404 full-screen */}
+        {/* extra routes */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <KonamiCodeEasterEgg />
     </>
   );
 }
