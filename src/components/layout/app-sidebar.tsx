@@ -63,7 +63,7 @@ export default function AppSidebar() {
                         variant="default"
                         size="default"
                         isActive={isActive}
-                        className="text-md justify-start w-full mb-2 py-6 px-3"
+                        className="text-base justify-start w-full mb-2 py-6 px-3"
                       >
                         <item.icon className="h-5 w-5 shrink-0" />
                         {open && <span className="truncate">{item.label}</span>}
@@ -94,7 +94,7 @@ export default function AppSidebar() {
                 <SidebarMenuButton
                   size="default"
                   isActive={pathname === settingsItem.path}
-                  className="text-md justify-start w-full mb-2 py-6 px-3"
+                  className="text-base justify-start w-full mb-2 py-6 px-3"
                 >
                   <settingsItem.icon className="h-5 w-5 shrink-0" />
                   {open && (
