@@ -8,7 +8,8 @@ interface LookerStudioCardProps {
 }
 
 export default function LookerStudioCard({ className }: LookerStudioCardProps) {
-  const REPORT_ID = "2afacd1f-b32e-4c12-baff-dd379e85fdea";
+  const REPORT_ID = import.meta.env.VITE_REPORT_ID;
+
   return (
     <Card className={className}>
       <CardHeader>

@@ -1,7 +1,7 @@
 
 "use client";
 
-import * as React from "react";
+import { useState } from "react";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import SampleBarChart from "../charts/sample-bar-chart";
@@ -15,7 +15,7 @@ interface DataVisualizationCardProps {
 }
 
 export default function DataVisualizationCard({ className }: DataVisualizationCardProps) {
-  const [activeTab, setActiveTab] = React.useState("barChart");
+  const [activeTab, setActiveTab] = useState("barChart");
 
   return (
     <Card className={className}>

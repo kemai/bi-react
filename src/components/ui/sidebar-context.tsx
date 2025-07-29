@@ -1,10 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
 "use client";
+import { forwardRef, createContext, useContext, useState, useCallback, useMemo, useEffect } from "react";
 
-import * as React from "react";
 import { useIsMobile } from "../hooks/use-mobile";
 import { TooltipProvider } from "../ui/tooltip";
 import { cn } from "../../lib/utils";
+
+import type { ComponentProps, CSSProperties } from "react";
+
 
 // ————— constants —————
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
@@ -32,11 +35,11 @@ export type SidebarContextValue = {
 };
 
 // ————— the context itself —————
-export const SidebarContext = React.createContext<SidebarContextValue | null>(null);
+export const SidebarContext = createContext<SidebarContextValue | null>(null);
 
 // ————— hook for easy consumption —————
 export function useSidebar(): SidebarContextValue {
-  const ctx = React.useContext(SidebarContext);
+  const ctx = useContext(SidebarContext);
   if (!ctx) {
     throw new Error("useSidebar must be used within a SidebarProvider.");
   }
@@ -45,7 +48,7 @@ export function useSidebar(): SidebarContextValue {
 
 // ————— provider props —————
 interface SidebarProviderProps
-  extends React.ComponentProps<"div"> {
+  extends ComponentProps<"div"> {
   /** initial desktop open state */
   defaultOpen?: boolean;
   /** controlled desktop open state */
@@ -55,7 +58,7 @@ interface SidebarProviderProps
 }
 
 // ————— the provider component —————
-export const SidebarProvider = React.forwardRef<
+export const SidebarProvider = forwardRef<
   HTMLDivElement,
   SidebarProviderProps
 >(
@@ -72,10 +75,10 @@ export const SidebarProvider = React.forwardRef<
     ref
   ) => {
     const isMobile = useIsMobile();
-    const [openMobile, setOpenMobile] = React.useState(false);
+    const [openMobile, setOpenMobile] = useState(false);
 
     // desktop uncontrolled state (read from cookie)
-    const [internalOpen, setInternalOpen] = React.useState<boolean>(() => {
+    const [internalOpen, setInternalOpen] = useState<boolean>(() => {
       if (typeof window !== "undefined") {
         const match = document.cookie
           .split("; ")
@@ -91,7 +94,7 @@ export const SidebarProvider = React.forwardRef<
     const open = openProp ?? internalOpen;
 
     // setter that updates cookie and calls onOpenChange if provided
-    const setOpen = React.useCallback(
+    const setOpen = useCallback(
       (value: boolean | ((prev: boolean) => boolean)) => {
         const newOpen =
           typeof value === "function" ? value(open) : value;
@@ -106,7 +109,7 @@ export const SidebarProvider = React.forwardRef<
     );
 
     // toggles appropriate state for mobile vs desktop
-    const toggleSidebar = React.useCallback(() => {
+    const toggleSidebar = useCallback(() => {
       if (isMobile) {
         setOpenMobile((o) => !o);
       } else {
@@ -115,7 +118,7 @@ export const SidebarProvider = React.forwardRef<
     }, [isMobile, setOpen]);
 
     // listen for ⌘B / Ctrl+B
-    React.useEffect(() => {
+    useEffect(() => {
       const onKey = (e: KeyboardEvent) => {
         if (
           (e.metaKey || e.ctrlKey) &&
@@ -132,7 +135,7 @@ export const SidebarProvider = React.forwardRef<
     const state = open ? "expanded" : "collapsed";
 
     // memoize the context value
-    const contextValue = React.useMemo<SidebarContextValue>(
+    const contextValue = useMemo<SidebarContextValue>(
       () => ({
         state,
         open,
@@ -163,7 +166,7 @@ export const SidebarProvider = React.forwardRef<
                 "--sidebar-width": SIDEBAR_WIDTH,
                 "--sidebar-width-icon": SIDEBAR_WIDTH_ICON,
                 ...style,
-              } as React.CSSProperties
+              } as CSSProperties
             }
             className={cn(
               "group/sidebar-wrapper min-h-svh w-full has-[[data-variant=inset]]:bg-sidebar",

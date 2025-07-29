@@ -23,6 +23,3 @@ dist-ssr
 *.sln
 *.sw?
 
-
-src/pages/404
-src/components/arcade

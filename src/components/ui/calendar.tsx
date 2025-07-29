@@ -1,13 +1,13 @@
 "use client"
-
-import * as React from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { DayPicker } from "react-day-picker"
 
 import { cn } from "../../lib/utils"
 import { buttonVariants } from "../ui/button.styles"
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker>
+import type { ComponentProps, ButtonHTMLAttributes} from "react";
+
+export type CalendarProps = ComponentProps<typeof DayPicker>
 
 export function Calendar({
   className,
@@ -58,7 +58,7 @@ export function Calendar({
         PreviousMonthButton: ({
           className,
           ...props
-        }: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+        }: ButtonHTMLAttributes<HTMLButtonElement>) => (
           <button
             type="button"
             className={cn("absolute left-1 p-0 bg-transparent", className)}
@@ -70,7 +70,7 @@ export function Calendar({
         NextMonthButton: ({
           className,
           ...props
-        }: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+        }: ButtonHTMLAttributes<HTMLButtonElement>) => (
           <button
             type="button"
             className={cn("absolute right-1 p-0 bg-transparent", className)}

@@ -4,7 +4,9 @@ import SourcesPage from "./pages/DataSourcesPage";
 import QueryPage from "./pages/BIQueryPage";
 import ReportsPage from "./pages/ReportsPage";
 import SettingsPage from "./pages/SettingsPage";
+import type { ReactNode }   from "react"
 import type { LucideIcon } from "lucide-react";
+
 
 import {
   LayoutDashboard,
@@ -17,7 +19,7 @@ import {
 export interface AppRoute {
   path: string;
   label: string;
-  element: React.ReactNode;
+  element: ReactNode;
   icon: LucideIcon;
 }
 

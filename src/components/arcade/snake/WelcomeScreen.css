@@ -1,0 +1,42 @@
+.game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    width: 100%;
+}
+
+.start-screen {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.start-screen h1 {
+    color: #EB3C24;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.start-screen p {
+    color: white;
+    margin: 10px 0;
+}
+
+.treasure-box {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    padding: 10px;
+}
+
+.treasure-box:hover {
+    transform: scale(1.1);
+}
+
+.treasure-box svg {
+    width: 80px;
+    height: 80px;
+} 

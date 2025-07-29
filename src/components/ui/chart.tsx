@@ -1,6 +1,6 @@
 "use client";
+import { useState, useEffect } from "react";
 
-import * as React from "react";
 import {
   VictoryChart,
   VictoryTooltip,
@@ -9,12 +9,14 @@ import {
   VictoryLine,
 } from "victory";
 
+import type { ComponentType , ReactNode} from "react";
+
 export type SeriesDatum = { x: string | number; y: number };
 
 export type SeriesConfig = {
   key: string;
-  label?: React.ReactNode;
-  icon?: React.ComponentType;
+  label?: ReactNode;
+  icon?: ComponentType;
   color: string;
   theme?: { light: string; dark: string };
   data: SeriesDatum[];
@@ -70,10 +72,10 @@ export function Chart({
 Chart.displayName = "Chart";
 
 function useMediaQuery(query: string) {
-  const [matches, setMatches] = React.useState(() =>
+  const [matches, setMatches] = useState(() =>
     typeof window !== "undefined" ? window.matchMedia(query).matches : false
   );
-  React.useEffect(() => {
+  useEffect(() => {
     const mq = window.matchMedia(query);
     const handler = () => setMatches(mq.matches);
     mq.addEventListener("change", handler);

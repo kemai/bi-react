@@ -1,7 +1,7 @@
 
 "use client";
+import { useState, useRef } from "react";
 
-import * as React from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
@@ -11,17 +11,19 @@ import { Badge } from "../components/ui/badge";
 import PageHeader from '../components/layout/page-header';
 import DataSourcesContentCard from '../components/layout/data-sources-content-card';
 
+import type { ChangeEvent, FormEvent,} from "react";
+
 const MAX_FILE_SIZE_MB = 50;
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
 export default function DataSourcesPage() {
   const { toast } = useToast();
-  const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
-  const [fileError, setFileError] = React.useState<string | null>(null);
-  const [isUploading, setIsUploading] = React.useState(false);
-  const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       if (file.type !== "text/csv" && !file.name.endsWith(".csv")) {
@@ -50,7 +52,7 @@ export default function DataSourcesPage() {
     }
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!selectedFile) {
       toast({

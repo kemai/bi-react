@@ -1,0 +1,231 @@
+.not-found-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url('header_bg.jpg') no-repeat center center fixed;
+  background-size: cover; /* Make the background cover the entire screen */
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center; /* Center text content */
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 600px; /* Reduce max-width for better focus on mobile and desktop */
+    padding: 2rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr; /* Use two columns on larger screens */
+      max-width: 800px;
+    }
+  }
+
+  .text-content {
+    .title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+
+      @media (max-width: 768px) {
+        font-size: 2rem; /* Adjust font size for mobile */
+      }
+    }
+
+    .subtext {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      font-family: 'Orbitron', sans-serif; 
+
+      @media (max-width: 768px) {
+        font-size: 1rem; /* Adjust font size for mobile */
+      }
+    }
+
+    .countdown {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: rgba(255, 255, 255, 0.7);
+
+      .back-home {
+        font-weight: 500;
+        color: #87CEFA;
+      }
+    }
+
+    .home-link {
+      color: #ffffff;
+      font-size: 1rem;
+      text-decoration: underline;
+      font-weight: 500;
+
+      @media (max-width: 768px) {
+        font-size: 0.9rem; /* Adjust font size for mobile */
+      }
+    }
+  }
+
+  .error-code {
+    font-size: 8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: 768px) {
+      font-size: 5rem; /* Adjust font size for mobile */
+    }
+
+    .astronaut-icon-wrapper {
+      position: relative;
+
+      .astronaut-icon {
+        width: 100px;
+        height: auto;
+        margin-top: -10px;
+
+        @media (max-width: 768px) {
+          width: 80px; /* Adjust size for mobile */
+        }
+      }
+
+      .astronaut-face {
+        position: absolute;
+        top: 81px;  /* Adjust to line up inside the helmet */
+        left: 37px; /* Adjust to line up inside the helmet */
+        width: 13px;
+        height: auto;
+        transition: opacity 0.3s ease;
+
+        @media (max-width: 768px) {
+            top: 43px;  /* Adjust to line up inside the helmet */
+            left: 29px; /* Adjust to line up inside the helmet */
+            width: 10px;
+        }
+      }
+
+    }
+  }
+}
+
+
+.astronaut-icon-wrapper {
+  position: relative;
+}
+
+.astronaut-icon {
+  transition: transform 1s ease-in;
+}
+
+.animate-rocket {
+  animation: rocketMove 5s forwards;
+}
+
+@keyframes rocketMove {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-50px) scale(1.2); /* Move up slightly, enlarge a bit */
+  }
+  70% {
+    transform: translateY(-50px) scale(1.2); /* Pause before horizontal */
+  }
+  100% {
+    transform: translateX(-300vh) scale(1.5); 
+  }
+}
+
+.animate-astronaut {
+  animation: astronautMove 5s forwards;
+}
+
+@keyframes astronautMove {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-55px) scale(1.2); /* Move up slightly, enlarge a bit */
+  }
+  70% {
+    transform: translateY(-55px) scale(1.2); /* Pause before horizontal */
+  }
+  100% {
+    transform: translateX(-300vh) scale(1.5); 
+  }
+}
+
+.rocket-launch .astronaut-icon-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: 60px;
+  left: 75%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 50px;
+  background: radial-gradient(circle at center, rgba(255, 140, 0, 0.8), rgba(255, 69, 0, 0.6), rgba(255, 0, 0, 0));
+  border-radius: 50%;
+  animation: flameMove 5s forwards, explosionEffect 1s 4s forwards; /* Trigger explosion after 4 seconds */
+
+    @media (max-width: 768px) {
+      top: 60px;  /* Adjust to line up inside the helmet */
+      left: 50px; /* Adjust to line up inside the helmet */
+      width: 50px;
+  }
+}
+
+
+@keyframes flameMove {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-50px) scale(1.2); /* Move flame up with rocket */
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-50px) scale(1.2); /* Keep flame with rocket at peak */
+  }
+  100% {
+    opacity: 1; 
+    transform: translateY(0px) scale(1.2)
+  }
+}
+
+@keyframes flameEffect {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* Explosion Effect */
+@keyframes explosionEffect {
+  0% {
+    opacity: 1;
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, rgba(255, 140, 0, 1), rgba(255, 69, 0, 0.8), rgba(255, 0, 0, 0));
+    transform: scale(2);
+  }
+  50% {
+    opacity: 1;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(255, 200, 0, 1), rgba(255, 100, 0, 0.6), rgba(255, 0, 0, 0));
+    transform: scale(3.5);
+  }
+  100% {
+    opacity: 0;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(255, 255, 0, 1), rgba(255, 140, 0, 0.4), rgba(255, 0, 0, 0));
+    transform: scale(5);
+  }
+}

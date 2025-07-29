@@ -1,5 +1,5 @@
 
-import LookerBIQuerySection from '../components/dashboard/looker-bi-query-section';
+import LookerBIQuerySection from '../components/dashboard/bi-query-section';
 import PageHeader from '../components/layout/page-header';
 
 export default function BIQueryPage() {
